@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ping State</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+</head>
+<body>
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>Time</th>
+                <th>Packet Loss</th>
+                <th>Min Rtt</th>
+                <th>Max Rtt</th>
+                <th>Avg Rtt</th>
+                <th>Destination ID</th>
+            </tr>
+            {% for templist in pinglist %}
+                <tr>
+               {% for list in templist %}
+                    <td>{{ list }}</td>
+               {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
