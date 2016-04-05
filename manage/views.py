@@ -16,7 +16,7 @@ NATIONAL = ['ko','en','jp','es','zh','fr']
 class CheckPing(TemplateView):
 
     def get(self, request):
-        db = MySQLdb.connect("192.168.73.178", "root", "dnflwlq2", "status")
+        db = MySQLdb.connect("192.168.73.180", "root", "dnflwlq2", "status")
         cursor = db.cursor()
         cursor.execute("SELECT * FROM ping_stat")
         pingStatelist = cursor.fetchall()

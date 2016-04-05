@@ -55,15 +55,15 @@ class UpdateList(models.Model):
     def __str__(self):
         return self.title
 
-"""
-class Version(models.Model):
-
-    rec_ver = models.CharField(max_length=5)
-    man_ver = models.CharField(max_length=5)
-    reg_dt = models.DateTimeField(auto_now = True)
-
-    applist = models.OneToOneField(Applist, on_delete=models.CASCADE)
-
+class DeployStatus(models.Model):
+    title = models.CharField(max_length = 40)
+    deploy_info = models.TextField()
+    card_link = models.URLField()
+    register_time = models.DateTimeField(auto_now_add=True)
+    git_link = models.URLField()
+    
     class Meta:
-        db_table = "Version"
-"""
+        db_table = "Deploy"
+        
+    def __str__(self):
+        return self.title
