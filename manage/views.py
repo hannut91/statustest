@@ -6,10 +6,12 @@ from django.db.models import Q
 from django.views.generic import View,TemplateView
 import MySQLdb
 
+APPNAME_FAIL_MESSAGE = "Can't find appname"
 VERSION_FAIL_MESSAGE = "Can't find device's version infomation"
 FAIL_MESSAGE = "Can't find device's ID"
-GET_FAIL_MESSAGE = "Can't find GET message"
+GET_FAIL_MESSAGE = "Can't find GET data"
 SUCCESS_MESSAGE = "Success"
+NATIONAL = ['ko','en','jp','es','zh','fr']
 
 class CheckPing(TemplateView):
 
@@ -26,16 +28,18 @@ class CheckState(View):
         useros = request.GET.get('os',None)
         locale = request.GET.get('locale',None)
 
-        if not useros or not locale:
+        if not useros or locale not in NATIONAL:
             return JsonResponse({'msg':GET_FAIL_MESSAGE})
+
         try:
             result = Applist.objects.get(app_name=useros)
-        except (Applist.MultipleObjectsReturned,Applist.DoesNotExist):
-            return JsonResponse({'msg':FAIL_MESSAGE})
+        except (Applist.MultipleObjectsReturned, Applist.DoesNotExist):
+            return JsonResponse({'msg':APPNAME_FAIL_MESSAGE})
+
         output = {}
+
         mtn_list = result.maintenance_set.all()
         notice_result = result.notice_set.filter(Q(locale=locale)|Q(locale='ww'))
-
         if mtn_list:
             templist = []
             for mtn_list in mtn_list:
@@ -58,9 +62,12 @@ class CheckState(View):
                 temp['notice_show'] = notice_list.show_notice
                 templist.append(temp)
             output['Notice'] = templist
-        if not result.updatelist_set.all():
+
+        if not result.updatelist_set.filter(Q(locale=locale)|Q(locale='ww')):
             return JsonResponse({'msg':VERSION_FAIL_MESSAGE})
-        version_result = result.updatelist_set.order_by('-build_ver')[0]
+
+        version_result = result.updatelist_set.filter(Q(locale=locale)|Q(locale='ww')).order_by('-build_ver')[0]
+
         if version_result:
             temp = {}
             temp['rec_ver'] = version_result.rec_ver
@@ -72,6 +79,7 @@ class CheckState(View):
             return JsonResponse(output)
         else:
             return JsonResponse({'msg':FAIL_MESSAGE})
+
 
 def home(request):
     return render(request, 'mobile/index.html')

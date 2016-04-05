@@ -85,7 +85,7 @@ DATABASES = {
         'NAME': 'status',
         'USER': 'root',
         'PASSWORD': 'dnflwlq2',
-        'HOST': '192.168.73.178',
+        'HOST': '192.168.73.180',
         'PORT': '3306',
     }
 }

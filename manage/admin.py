@@ -12,4 +12,3 @@ admin.site.register(Maintenance)
 admin.site.register(Notice, NoticeAdmin)
 admin.site.register(Applist)
 admin.site.register(UpdateList, UpdateAdmin)
-# Register your models here.
