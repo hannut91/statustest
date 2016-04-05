@@ -21,8 +21,5 @@ from . import views
 urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'stat/',views.CheckState.as_view(), name='check_stat'),
-    url(r'^checkversion=(?P<useros>[a-z]{1,})$', views.check_version, name='check_version'),
-    url(r'^notice/(?P<useros>[a-z]{1,})/(?P<locale>[a-z]{1,})', views.check_notice, name='check_notice'),
-    url(r'^maintenance/(?P<useros>[a-z]{1,})',views.check_maintenance, name='check_maintenance'),
     url(r'pingstate/',views.CheckPing.as_view(), name="check_ping"),
 ]
