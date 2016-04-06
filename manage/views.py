@@ -93,6 +93,7 @@ class SendGit(View):
 
     @csrf_exempt
     def post(self, request):
+        commits = {}
         commits = request.body
         print commits.get('commits')
         return HttpResponse("OK")
