@@ -84,7 +84,7 @@ class CheckState(View):
 def home(request):
     return render(request, 'mobile/index.html')
     
-class CheckState(View):
+class SendGit(View):
 
     def post(self, request):
         return HttpResponse("OK")
