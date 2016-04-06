@@ -83,7 +83,7 @@ class GitInfo(models.Model):
     repository_master_branch = models.CharField(max_length=40)
     
     class Meta:
-        db_table = "Deploy"
+        db_table = "Gitinfo"
         
     def __str__(self):
         return self.commit_message
