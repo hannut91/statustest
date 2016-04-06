@@ -88,6 +88,7 @@ class SendGit(View):
 
     def post(self, request):
         return HttpResponse("OK")
-        
+    
+    @csrf_protect
     def get(self,request):
         return HttpResponse("GET OK")
