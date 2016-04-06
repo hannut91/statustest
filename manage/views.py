@@ -5,6 +5,7 @@ from django.db.models import Q
 
 from django.views.generic import View,TemplateView
 import MySQLdb
+from django.views.decorators.csrf import csrf_protect
 
 APPNAME_FAIL_MESSAGE = "Can't find appname"
 VERSION_FAIL_MESSAGE = "Can't find device's version infomation"
