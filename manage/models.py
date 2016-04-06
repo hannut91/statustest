@@ -70,7 +70,7 @@ class DeployStatus(models.Model):
         return self.title
         
 class GitInfo(models.Model):
-    commit_id = models.CharField(max_lenth = 40)
+    commit_id = models.CharField(max_length = 40)
     commit_message = models.CharField(max_length=255)
     commit_time = models.DateTimeField()
     commit_url = models.URLField()
