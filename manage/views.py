@@ -90,4 +90,4 @@ class SendGit(View):
         return HttpResponse("OK")
         
     def get(self,request):
-        return HttpREsponse("GET OK")
+        return HttpResponse("GET OK")
