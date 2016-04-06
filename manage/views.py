@@ -98,12 +98,12 @@ class SendGit(View):
             )
             return HttpResponse("New Repository")
         elif commits.has_key("commits"):
+            """
             try:
                 result = RepositoryList.objects.get(repo_name=commits['repository']['name'])
             except (RepositoryList.MultipleObjectsReturned, RepositoryList.DoesNotExist):
                 return HttpResponse("Respository does not exist")
-            
-            result.getinfo_se
+            """
             
             save_git_info = GitInfo(
                 commit_id = commits['commits'][0]['id'],
@@ -125,8 +125,9 @@ class SendGit(View):
     def get(self,request):
         return HttpResponse("GET OK")    
         
+"""
 class GitList(TemplateView):
 
     def get(self,request):
         return render_to_response("server/pingstate.html",{'pinglist':pingStatelist})
-
+"""

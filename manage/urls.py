@@ -7,5 +7,5 @@ urlpatterns = [
     url(r'stat/',views.CheckState.as_view(), name='check_stat'),
     url(r'pingstate/',views.CheckPing.as_view(), name="check_ping"),
     url(r'sendgit',views.SendGit.as_view(),name="send_git"),
-    url(r'gitlist/'views.GitList.as_view(),name="git_list"),
+    #url(r'gitlist/'views.GitList.as_view(),name="git_list"),
 ]

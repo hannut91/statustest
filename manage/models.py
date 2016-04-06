@@ -55,20 +55,7 @@ class UpdateList(models.Model):
     def __str__(self):
         return self.title
 
-class DeployStatus(models.Model):
-
-    title = models.CharField(max_length = 40)
-    deploy_info = models.TextField()
-    card_link = models.URLField()
-    register_time = models.DateTimeField(auto_now_add=True)
-    git_link = models.URLField()
-    
-    class Meta:
-        db_table = "Deploy"
-        
-    def __str__(self):
-        return self.title
-        
+"""   
 class GitInfo(models.Model):
     commit_id = models.CharField(max_length = 40)
     commit_message = models.CharField(max_length=255)
@@ -97,3 +84,4 @@ class RepositoryList(models.Model):
         
     def __str__(self):
         return self.repo_name
+"""
