@@ -1,6 +1,6 @@
 from django.shortcuts import render, render_to_response
 from manage.models import Maintenance, Notice, Applist, UpdateList
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.db.models import Q
 
 from django.views.generic import View,TemplateView
@@ -83,3 +83,8 @@ class CheckState(View):
 
 def home(request):
     return render(request, 'mobile/index.html')
+    
+class CheckState(View):
+
+    def post(self, request):
+        return HttpResponse
