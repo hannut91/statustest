@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'manage',
-    'django_cron',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -48,10 +47,6 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
-
-CRON_CLASSES = [
-    "webserver.croning.MyCronJob",
 ]
 
 ROOT_URLCONF = 'status.urls'
