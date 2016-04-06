@@ -88,3 +88,6 @@ class SendGit(View):
 
     def post(self, request):
         return HttpResponse("OK")
+        
+    def get(self,request):
+        return HttpREsponse("GET OK")
