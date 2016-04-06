@@ -8,7 +8,7 @@ import MySQLdb
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 import logging
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('project.interesting.stuff')
 
 
 APPNAME_FAIL_MESSAGE = "Can't find appname"
