@@ -8,7 +8,7 @@ import MySQLdb
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 import logging
 
-logger = logging.getLogger('project.interesting.stuff')
+logger = logging.getLogger(__name__)
 
 
 APPNAME_FAIL_MESSAGE = "Can't find appname"
@@ -94,8 +94,9 @@ class SendGit(View):
     @csrf_exempt
     def post(self, request):
         commits = request.POST.get('commits',None)
-        logger.info("Post is called")
-        logger.info(commits)
+        logger.debug("Post is called")
+        logger.debug(commits)
+        print "hi"
         return HttpResponse("OK")
     
     def get(self,request):

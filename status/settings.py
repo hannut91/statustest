@@ -126,6 +126,9 @@ STATIC_URL = '/static/'
 
 CSRF_COOKIE_SECURE = True
 
+DEBUG = True
+DJANGO_LOG_LEVEL = DEBUG
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -137,7 +140,7 @@ LOGGING = {
     'loggers': {
         'django': {
             'handlers': ['console'],
-            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
         },
     },
 }
