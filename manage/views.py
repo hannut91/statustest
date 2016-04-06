@@ -7,7 +7,7 @@ from django.views.generic import View,TemplateView
 import MySQLdb
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 import logging
-
+import json
 logger = logging.getLogger(__name__)
 
 
@@ -93,10 +93,10 @@ class SendGit(View):
 
     @csrf_exempt
     def post(self, request):
-        commits = request.POST
+        commits = json.loads(request.body)
         print commits
         print commits.get('commits')
         return HttpResponse("OK")
-    
+        
     def get(self,request):
         return HttpResponse("GET OK")
