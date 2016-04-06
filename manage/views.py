@@ -1,5 +1,5 @@
 from django.shortcuts import render, render_to_response
-from manage.models import Maintenance, Notice, Applist, UpdateList, DeployStatus,GitInfo
+from manage.models import Maintenance, Notice, Applist, UpdateList, DeployStatus,GitInfo, RepositoryList
 from django.http import JsonResponse, HttpResponse
 from django.db.models import Q
 
@@ -92,23 +92,41 @@ class SendGit(View):
     @csrf_exempt
     def post(self, request):
         commits = json.loads(request.body)
-        
-        save_git_info = GitInfo(
-            commit_id = commits['commits'][0]['id'],
-            commit_message = commits['commits'][0]['message'],
-            commit_time = commits['commits'][0]['timestamp'],
-            commit_url = commits['commits'][0]['url'],
-            commit_added = commits['commits'][0]['added'],
-            commit_removed = commits['commits'][0]['removed'],
-            commit_modified = commits['commits'][0]['modified'],
-            repository_name = commits['repository']['name'],
-            repository_url = commits['repository']['url'],
-            repository_default_branch = commits['repository']['default_branch'],
-            repository_master_branch = commits['repository']['master_branch']
-        )
-        save_git_info.save()
-        
-        return HttpResponse("OK")
+        if commits.has_key("hook_id"):
+            RepositoryList.objects.get_or_create(
+                repo_name = commits['repository']['name']
+            )
+            return HttpResponse("New Repository")
+        elif commits.has_key("commits"):
+            try:
+                result = RepositoryList.objects.get(repo_name=commits['repository']['name'])
+            except (RepositoryList.MultipleObjectsReturned, RepositoryList.DoesNotExist):
+                return HttpResponse("Respository does not exist")
+            
+            result.getinfo_se
+            
+            save_git_info = GitInfo(
+                commit_id = commits['commits'][0]['id'],
+                commit_message = commits['commits'][0]['message'],
+                commit_time = commits['commits'][0]['timestamp'],
+                commit_url = commits['commits'][0]['url'],
+                commit_added = commits['commits'][0]['added'],
+                commit_removed = commits['commits'][0]['removed'],
+                commit_modified = commits['commits'][0]['modified'],
+                repository_name = commits['repository']['name'],
+                repository_url = commits['repository']['url'],
+                repository_default_branch = commits['repository']['default_branch'],
+                repository_master_branch = commits['repository']['master_branch']
+            )
+            save_git_info.save()
+            
+            return HttpResponse("OK")      
         
     def get(self,request):
-        return HttpResponse("GET OK")
+        return HttpResponse("GET OK")    
+        
+class GitList(TemplateView):
+
+    def get(self,request):
+        return render_to_response("server/pingstate.html",{'pinglist':pingStatelist})
+

@@ -81,9 +81,19 @@ class GitInfo(models.Model):
     repository_url = models.URLField()
     repository_default_branch = models.CharField(max_length=40)
     repository_master_branch = models.CharField(max_length=40)
-    
+    repositorylist = models.ForeignKey(RepositoryList, on_delete=models.CASCADE)
+
     class Meta:
         db_table = "Gitinfo"
         
     def __str__(self):
         return self.commit_message
+        
+class RepositoryList(models.Model):
+    repo_name = models.CharField(max_length=40)
+    
+    class Meta:
+        db_table = "Repositorylist"
+        
+    def __str__(self):
+        return self.repo_name
