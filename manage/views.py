@@ -5,7 +5,7 @@ from django.db.models import Q
 
 from django.views.generic import View,TemplateView
 import MySQLdb
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 APPNAME_FAIL_MESSAGE = "Can't find appname"
 VERSION_FAIL_MESSAGE = "Can't find device's version infomation"
@@ -84,7 +84,8 @@ class CheckState(View):
 
 def home(request):
     return render(request, 'mobile/index.html')
-    
+
+@csrf_exempt
 class SendGit(View):
 
     @csrf_protect
