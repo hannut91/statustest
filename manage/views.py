@@ -94,16 +94,16 @@ class SendGit(View):
         commits = json.loads(request.body)
         
         save_git_info = GitInfo(
-            commit_id = commits['commits'][0]['id']
-            commit_message = commits['commits'][0]['message']
-            commit_time = commits['commits'][0]['timestamp']
-            commit_url = commits['commits'][0]['url']
-            commit_added = commits['commits'][0]['added']
-            commit_removed = commits['commits'][0]['removed']
-            commit_modified = commits['commits'][0]['modified']
-            repository_name = commits['repository']['name']
-            repository_url = commits['repository']['url']
-            repository_default_branch = commits['repository']['default_branch']
+            commit_id = commits['commits'][0]['id'],
+            commit_message = commits['commits'][0]['message'],
+            commit_time = commits['commits'][0]['timestamp'],
+            commit_url = commits['commits'][0]['url'],
+            commit_added = commits['commits'][0]['added'],
+            commit_removed = commits['commits'][0]['removed'],
+            commit_modified = commits['commits'][0]['modified'],
+            repository_name = commits['repository']['name'],
+            repository_url = commits['repository']['url'],
+            repository_default_branch = commits['repository']['default_branch'],
             repository_master_branch = commits['repository']['master_branch']
         )
         save_git_info.save()
