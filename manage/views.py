@@ -1,11 +1,15 @@
 from django.shortcuts import render, render_to_response
-from manage.models import Maintenance, Notice, Applist, UpdateList
+from manage.models import Maintenance, Notice, Applist, UpdateList, DeployStatus
 from django.http import JsonResponse, HttpResponse
 from django.db.models import Q
 
 from django.views.generic import View,TemplateView
 import MySQLdb
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 APPNAME_FAIL_MESSAGE = "Can't find appname"
 VERSION_FAIL_MESSAGE = "Can't find device's version infomation"
@@ -89,6 +93,9 @@ class SendGit(View):
 
     @csrf_exempt
     def post(self, request):
+        commits = request.POST.get('commits',None)
+        logger.info("Post is called")
+        logger.info(commits)
         return HttpResponse("OK")
     
     def get(self,request):
