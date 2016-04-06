@@ -87,4 +87,4 @@ def home(request):
 class CheckState(View):
 
     def post(self, request):
-        return HttpResponse
+        return HttpResponse("OK")
