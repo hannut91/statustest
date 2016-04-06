@@ -85,10 +85,9 @@ class CheckState(View):
 def home(request):
     return render(request, 'mobile/index.html')
 
-@csrf_exempt
 class SendGit(View):
 
-    @csrf_protect
+    @csrf_exempt
     def post(self, request):
         return HttpResponse("OK")
     
