@@ -1,14 +1,12 @@
 from django.shortcuts import render, render_to_response
-from manage.models import Maintenance, Notice, Applist, UpdateList, DeployStatus
+from manage.models import Maintenance, Notice, Applist, UpdateList, DeployStatus,GitInfo
 from django.http import JsonResponse, HttpResponse
 from django.db.models import Q
 
 from django.views.generic import View,TemplateView
 import MySQLdb
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
-import logging
 import json
-logger = logging.getLogger(__name__)
 
 
 APPNAME_FAIL_MESSAGE = "Can't find appname"
@@ -94,8 +92,22 @@ class SendGit(View):
     @csrf_exempt
     def post(self, request):
         commits = json.loads(request.body)
-        print commits
-        print commits.get('commits')
+        
+        save_git_info = GitInfo(
+            commit_id = commits['commits'][0]['id']
+            commit_message = commits['commits'][0]['message']
+            commit_time = commits['commits'][0]['timestamp']
+            commit_url = commits['commits'][0]['url']
+            commit_added = commits['commits'][0]['added']
+            commit_removed = commits['commits'][0]['removed']
+            commit_modified = commits['commits'][0]['modified']
+            repository_name = commits['repository']['name']
+            repository_url = commits['repository']['url']
+            repository_default_branch = commits['repository']['default_branch']
+            repository_master_branch = commits['repository']['master_branch']
+        )
+        save_git_info.save()
+        
         return HttpResponse("OK")
         
     def get(self,request):
